@@ -1,1 +1,46 @@
+# Splunk Installation and Universal Forwarder Setup
+
+## Objective
+
+Build a basic SIEM lab using Splunk Enterprise and Splunk Universal Forwarder to collect Windows logs.
+
+## Lab Setup
+
+* Windows 10 LTSC
+* Splunk Enterprise
+* Sysmon
+* Splunk Universal Forwarder
+
+## Steps
+
+### 1. Install Splunk Enterprise
+
+[SCREENSHOT-01]
+
+### 2. Install Sysmon
+
+[SCREENSHOT-02]
+
+### 3. Install Splunk Universal Forwarder
+
+[SCREENSHOT-03]
+
+### 4. Configure Inputs
+
+[SCREENSHOT-04]
+
+### 5. Verify Log Collection
+
+[SCREENSHOT-05]
+
+## Sample Search
+
+```spl
+index=* EventCode=1
+| table _time host User Image CommandLine
+```
+
+## Result
+
+Successfully collected Sysmon logs and analyzed them in Splunk.
 
