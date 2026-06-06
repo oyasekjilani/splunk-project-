@@ -6,7 +6,7 @@ Simulate MITRE ATT&CK techniques using Atomic Red Team and analyze the generated
 
 ## Environment
 
-* Windows 10
+* Windows 10 LTSC
 * Splunk Enterprise
 * Sysmon
 * Atomic Red Team
