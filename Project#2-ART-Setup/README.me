@@ -1,1 +1,138 @@
 
+# MITRE ATT&CK Analysis with Atomic Red Team
+
+## Objective
+
+Simulate MITRE ATT&CK techniques using Atomic Red Team and analyze the generated events in Splunk.
+
+## Environment
+
+* Windows 10 LTSC
+* Splunk Enterprise
+* Sysmon
+* Atomic Red Team
+
+---
+
+## Step 1: Open PowerShell as Administrator
+
+Verify PowerShell execution policy:
+
+```powershell
+Get-ExecutionPolicy
+```
+
+If required:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
+```
+
+---
+
+## Step 2: Install Atomic Red Team Framework
+
+Install the Atomic Red Team module:
+
+```powershell
+Install-Module Invoke-AtomicRedTeam -Force
+```
+
+Import the module:
+
+```powershell
+Import-Module Invoke-AtomicRedTeam
+```
+
+---
+
+## Step 3: Download Atomic Tests
+
+Create Atomic Red Team folder:
+
+```powershell
+New-Item -ItemType Directory C:\AtomicRedTeam
+```
+
+Download Atomic Tests:
+
+```powershell
+Install-AtomicRedTeam -InstallPath C:\AtomicRedTeam
+```
+
+---
+
+## Step 4: Verify Available Tests
+
+Example:
+
+```powershell
+Invoke-AtomicTest T1059.001 -ShowDetailsBrief
+```
+
+---
+
+# Technique 1: T1059.001 - PowerShell
+
+Execute test:
+
+```powershell
+Invoke-AtomicTest T1059.001
+```
+
+Search in Splunk:
+
+```spl
+index=* EventCode=1
+| table _time host User Image CommandLine
+```
+
+---
+
+# Technique 2: T1003.001 - LSASS Memory Access
+
+Execute test:
+
+```powershell
+Invoke-AtomicTest T1003.001
+```
+
+Search in Splunk:
+
+```spl
+index=* EventCode=10
+| table _time SourceImage TargetImage GrantedAccess
+```
+
+---
+
+# Technique 3: T1105 - Ingress Tool Transfer
+
+Execute test:
+
+```powershell
+Invoke-AtomicTest T1105
+```
+
+Search in Splunk:
+
+```spl
+index=* EventCode=3
+| table _time SourceIp DestinationIp Image
+```
+
+---
+
+## MITRE ATT&CK Mapping
+
+| Technique ID | Technique Name        |
+| ------------ | --------------------- |
+| T1059.001    | PowerShell            |
+| T1003.001    | LSASS Memory Access   |
+| T1105        | Ingress Tool Transfer |
+
+---
+
+## Result
+
+Successfully executed Atomic Red Team tests and detected the generated events in Splunk using Sysmon logs.
